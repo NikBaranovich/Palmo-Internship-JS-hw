@@ -1,300 +1,212 @@
-/**
- * 1. Use the prompt function to ask the user for their country of residence.
- * If user has not entered anything (empty line), display the message "Enter the data",
- * if user has entered a number, display the message "Name cannot be a number";
- */
-const getCountry = () => {
-  const userCountry = prompt("Please enter your country of residence");
+const readNumber = (message) => {
+  const number = prompt(message);
+  if (number == "") {
+    return readNumber(`You must enter a number. ${message}`);
+  }
+  if (isNaN(+number)) {
+    return readNumber(`The entered data is not a number. ${message}`);
+  }
+  return +number;
+};
+const getRandomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
-  if (userCountry === "") {
-    alert("Enter the data");
-  } else if (!isNaN(+userCountry)) {
-    alert("Name cannot be a number");
+/**1. Calculation of body mass index (BMI):
+ * The user enters his weight and height, the program shows him the BMI.
+ * The formula for calculation is easily found in Google. */
+const task1 = () => {
+  const getBMI = (weight, height) => weight / height ** 2;
+
+  const weight = readNumber("Enter your weight:");
+  const height = readNumber("Enter your height:");
+  const userBMI = getBMI(weight, height);
+  alert(userBMI);
+};
+//task1();
+
+/**2. Learning the multiplication table:
+ * The program asks a random question about multiplication
+ * (for example, 7x8), and the user must enter the answer.
+ * There should be a validation of the user's response. */
+const task2 = () => {
+  const getOperands = () => {
+    const firstOperand = getRandomNumber(0, 10);
+    const secondOperand = getRandomNumber(0, 10);
+    return { firstOperand, secondOperand };
+  };
+
+  const { firstOperand, secondOperand } = getOperands();
+  const userAnswer = readNumber(`${firstOperand}x${secondOperand} = `);
+  if (userAnswer === firstOperand * secondOperand) {
+    alert("You are correct!");
+  } else {
+    alert("You are wrong!");
   }
 };
-//getCountry();
+//task2();
 
 /**
- * 2. Use prompt to ask the user to enter two numbers.
- * Then print the result whether the second number is multiple of the first number;
+ * 3. Temperature converter: The user enters the temperature in
+ * degrees Celsius and receives the answer in degrees Fahrenheit.
  */
-const isMultipleOf = () => {
-  const readNumber = (message) => {
-    const number = prompt(message);
-    if (number == "") {
-      return readNumber("You must enter a number");
-    }
-    if (isNaN(+number)) {
-      return readNumber("The entered data is not a number");
-    }
-    return Number(number);
-  };
-  const firstNumber = readNumber("Enter the first number");
-  const secondNumber = readNumber("Enter the second number");
+const task3 = () => {
+  const celsiusToFahrenheit = (temperature) => (temperature * 9) / 5 + 32;
+  const userTemperature = readNumber("Enter your temperature in Celsius:");
+  alert(celsiusToFahrenheit(userTemperature));
+};
+//task3();
+
+/**
+ * 4. Percentage calculation: The user enters two numbers,
+ * one of which is a percentage of the other.
+ * The program shows the result of how many percent is one number from another.
+ */
+const task4 = () => {
+  const firstNumber = readNumber("Enter first number");
+  const secondNumber = readNumber("Enter second number");
   alert(
-    `The second number is ${
-      secondNumber % firstNumber == 0 ? "" : "not "
-    }a multiple of the first number`
+    `Second number is ${((secondNumber * 100) / firstNumber).toFixed(
+      3
+    )}% of the first number`
   );
 };
-//isMultipleOf();
+//task4();
 
 /**
- * 3. Use prompt to ask the user to enter a number.
- * Do a check for an empty string and if the value is NOT a number.
- * As a result, display to the user what the number is (even or odd);
+ * 5. Distance calculator: The user enters the speed and time,
+ * the program shows how far the object will travel.
  */
-const checkEvenness = () => {
-  let num = Number(prompt("Enter the number"));
-  if (num == "") {
-    alert("You must enter the number");
-  } else if (isNaN(+num)) {
-    alert("The entered data is not a number");
-  } else {
-    alert(`The entered number is ${num % 2 == 0 ? "even" : "odd"}`);
-  }
+const task5 = () => {
+  const calcDistance = (speed, time) => speed * time;
+  const speed = readNumber("Enter speed");
+  const time = readNumber("Enter time");
+  alert(`Object will travel ${calcDistance(speed, time)} km`);
 };
-//checkEvenness();
+//task5();
 
 /**
- * 4. Create a script that asks the user to enter a number between 1 and 100.
- * Add a check that the value is a number or an empty string,
- * and for a given range (not less than 1 and not more than 100).
- * Show the user the answer to which quadrant the number is in.
- * 1-25 (first quarter), 26-50 (second quarter), 51-75 (third quarter),
- * 76-100 (fourth quarter);
+ * 6. Day of the week: The user enters a number from 1 to 7,
+ * the program displays the name of the day of the week.
  */
-const getQuarter = () => {
-  const readNumber = (message) => {
-    const number = prompt(message);
-    if (number == "") {
-      return readNumber("You must enter a number");
-    }
-    if (isNaN(+number)) {
-      return readNumber("The entered data is not a number");
-    }
-    return Number(number);
+const task6 = () => {
+  const getDayOfWeek = (dayNumber) => {
+    const daysOfWeek = [
+      "Monday",
+      "Tuesday",
+      "Wednesday my dudes🐸",
+      "Thursday",
+      "Friday",
+      "Daturday",
+      "Sunday",
+    ];
+    return (
+      daysOfWeek[dayNumber - 1] ||
+      "This day of the week does not exist. For now..."
+    );
   };
-  const readNumberInRange = (min, max, message) => {
-    const number = readNumber(message);
-    if (number < min || number > max) {
-      return readNumberInRange(
-        min,
-        max,
-        `You must enter number in a range (${min}, ${max})`
-      );
-    }
-    return Number(number);
-  };
-  const num = readNumberInRange(1, 100, "Enter a number between 1 and 100");
-  if (num <= 25) {
-    alert("Number is in the first quarter");
-  } else if (num <= 50) {
-    alert("Number is in the second quarter");
-  } else if (num <= 75) {
-    alert("Number is in the third quarter");
-  } else if (num <= 100) {
-    alert("Number is in the fourth quarter");
-  }
+  const userInput = readNumber("Enter a number from 1 to 7");
+  alert(`It's ${getDayOfWeek(userInput)}`);
 };
-//getQuarter();
+//task6();
 
 /**
- *5. Create a script that will print prime numbers from 1 to 500 in a loop;
+ * 7. Tax calculation: The user enters his salary,
+ * the program shows how much tax he has to pay. (e.g. tax 5%)
  */
-const getPrimeNumbers = () => {
-  const max = 500;
-  const sieve = new Array(max + 1).fill(true);
-  sieve[0] = sieve[1] = false;
-  for (let i = 2; i ** 2 <= max; i++) {
-    if (sieve[i] == true) {
-      for (let j = i ** 2; j <= max; j += i) {
-        sieve[j] = false;
-      }
-    }
+const task7 = () => {
+  const calcTax = (salary, tax) => (salary / 100) * tax;
+  const userSalary = readNumber("Enter your salary");
+  const userTax = calcTax(userSalary, 5);
+  alert(`Your tax is ${userTax}$`);
+};
+//task7();
+
+/**
+ * 8. Distribution of students by groups:
+ * The user enters the number of students and the number of groups.
+ * Program shows how many students will be in each group.
+ */
+const task8 = () => {
+  const studentNumber = readNumber("Enter the number of students");
+  const groupNumber = readNumber("Enter the number of groups");
+  const studentsDistribution = Math.floor(studentNumber / groupNumber);
+  let leftStudents = studentNumber - studentsDistribution * groupNumber;
+  const groups = new Array(groupNumber).fill(studentsDistribution);
+  for (let i = 0; leftStudents > 0; i++) {
+    groups[i] += 1;
+    leftStudents--;
   }
-  console.log(
-    sieve.reduce((primes, isPrime, number) => {
-      if (isPrime) {
-        primes.push(number);
-      }
-      return primes;
-    }, [])
+  console.log(`Students will be divided into groups: ${groups}`);
+};
+//task8();
+
+/**
+ * 9. Calculation of persentage in the bank:
+ * The user enters the amount of the deposit and the annual persentage.
+ * The program shows how much money the user will have in a year.
+ */
+const task9 = () => {
+  const calcDeposit = (depositAmount, annualPersentage, years) => {
+    return (
+      depositAmount * (1 + annualPersentage / 100) ** years - depositAmount
+    );
+  };
+
+  const depositAmount = readNumber("Enter the amount of the deposit");
+  const annualPersentage = readNumber("Enter the annual persentage");
+  alert(
+    `You will have ${calcDeposit(depositAmount, annualPersentage, 1)} in a year`
   );
 };
-//getPrimeNumbers();
+//task9();
 
 /**
- * 6. Create a script that prints numbers from 1000 to 300 in reverse order;
+ * 10. Words counter : User enters the text, the program shows how many words are in the text.
  */
-const printReverse = () => {
-  let reversedNumbers = "";
-  for (let i = 1000; i >= 300; i--) {
-    reversedNumbers += `${i}, `;
+const task10 = () => {
+  function countWords(text) {
+    return text.split(" ").filter(function (n) {
+      return n != "";
+    });
   }
-  reversedNumbers = reversedNumbers.slice(0, -2);
-  console.log(reversedNumbers);
+  const userText = prompt("Enter your text");
+  alert(`Your text contains ${countWords(userText)} words`);
 };
-//printReverse();
+//task10();
 
 /**
- * 7. Ask the user to enter a number.
- * Print the result of sum, subtraction, division and multiplication
- * of the entered number by all numbers from 1 to 100.
+ * 11. Calculation of the cost of the trip:
+ * Based on the distance entered by the user
+ * and the cost of fuel, the cost of the trip is calculated.
  */
-const printOperations = () => {
-  const readNumber = (message) => {
-    const number = prompt(message);
-    if (number == "") {
-      return readNumber("You must enter a number");
-    }
-    if (isNaN(+number)) {
-      return readNumber("The entered data is not a number");
-    }
-    return Number(number);
-  };
-  num = readNumber("Enter a number");
-  for (let i = 1; i <= 100; i++) {
-    console.log(
-      `${i}: sum= ${num + i}, sub=${num - i}, div = ${(num / i).toFixed(
-        2
-      )}, mult = ${num * i}`
-    );
-  }
-};
-//printOperations();
-
-/**
- * 8. Create a simple calculator. Ask the user for the first operand, the sign, and the second operand.
- * Display the result to the user performing a mathematical operation.
- * For example: entered 10, entered "+", entered 20 (3 prompt calls), the result is 30 (display in alert).
- * Signs can be "+", "-", "*", "/". Also check for the input of two operands and a sign.
- * When dividing, add processing division by zero. If division by zero occurs, display the message
- * “You cannot divide by 0.”
- */
-const printCalc = () => {
-  const readNumber = (message) => {
-    const number = prompt(message);
-    if (number == "") {
-      return readNumber("You must enter a number");
-    }
-    if (isNaN(+number)) {
-      return readNumber("The entered data is not a number");
-    }
-    return Number(number);
-  };
-  const readOperation = (message) => {
-    const operation = prompt(message);
-    const validOperations = ["+", "-", "*", "/"];
-    if (!validOperations.includes(operation)) {
-      return readOperation("You must enter a valid operation");
-    }
-    return operation;
-  };
-
-  const firstOperand = readNumber("Enter the first operand:");
-  const operation = readOperation(
-    'Enter the mathematical operation ("+", "-", "*", "/"):'
+const task11 = () => {
+  const distance = readNumber("Enter the distance of your trip (km)");
+  const fuelConsumption = readNumber(
+    "Enter the fuel consumption of your car (l/100 km)"
   );
-  const secondOperand = readNumber("Enter the second operand:");
-
-  if (operation == "+") {
-    alert(
-      `${firstOperand} + ${secondOperand} = ${firstOperand + secondOperand}`
-    );
-  } else if (operation == "-") {
-    alert(
-      `${firstOperand} - ${secondOperand} = ${firstOperand - secondOperand}`
-    );
-  } else if (operation == "*") {
-    alert(
-      `${firstOperand} * ${secondOperand} = ${firstOperand * secondOperand}`
-    );
-  } else if (operation == "/") {
-    secondOperand == 0
-      ? alert("You cannot divide by 0.")
-      : alert(
-          `${firstOperand} / ${secondOperand} = ${firstOperand * secondOperand}`
-        );
-  }
+  const fuelPrice = readNumber("Enter the cost of fuel (uah)");
+  const travelCost = ((distance * fuelConsumption) / 100) * fuelPrice;
+  alert(`Cost of your trip will be ${travelCost.toFixed(3)} uah/l`);
 };
-//printCalc();
+//task11();
 
 /**
- * 9. Create a "Guess the Number" game.
+ * 12. Password generator: Develop a program that generates random passwords
+ * of a given length with different characters
+ * (upper/lower case letters, numbers, special characters).
  */
-const guessNumber = () => {
-  const readNumber = (message) => {
-    const number = prompt(message);
-    if (number == "") {
-      return readNumber("You must enter a number");
+const task12 = () => {
+  const generatePassword = (passwordLength) => {
+    const chars =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+    const charsArray = chars.split("");
+    let password = "";
+    for (let i = 0; i < passwordLength; i++) {
+      password += charsArray[getRandomNumber(0, charsArray.length - 1)];
     }
-    if (isNaN(+number)) {
-      return readNumber("The entered data is not a number");
-    }
-    return Number(number);
+    return password;
   };
-  const readNumberInRange = (min, max, message) => {
-    const number = readNumber(message);
-    if (number < min || number > max) {
-      return readNumberInRange(
-        min,
-        max,
-        `You must enter number in a range (${min}, ${max})`
-      );
-    }
-    return Number(number);
-  };
-  function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  const bet = readNumber(
-    "Enter the amount of money you want to bet on the game"
-  );
-  const a = readNumber("Enter the minimum number for the number range");
-  const b = readNumber("Enter the maximum number for the number range");
-  const gain = ((b - a) * 0.1 + bet).toFixed(4);
-  alert(`You will receive ${gain}\$ if you win`);
-  const guess = readNumberInRange(a, b, "Guess the number!");
-  if (!isNaN(+guess)) {
-    const randomNum = getRandomNumber(a, b);
-    if (guess == randomNum) {
-      alert(`Congratulations! You won ${gain}\$!`);
-    } else {
-      alert(`Sorry! You lost your bet in the amount of ${bet}\$!`);
-    }
-  }
+  console.log(generatePassword(10));
 };
-//guessNumber();
-
-/**
- * 10. Create a rock-paper-scissors game.
- */
-const rockPaperScissors = () => {
-  const choices = ["rock", "paper", "scissors"];
-  const readInput = (message) => {
-    const input = prompt(message);
-    if (!choices.includes(input.toLowerCase())) {
-      return readInput("You must enter a valid move");
-    }
-    return input.toLowerCase();
-  };
-  function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  const playerChoice = readInput("Make a move(rock, paper, scissors)");
-  const enemyChoice = choices[getRandomNumber(0, 2)];
-  alert(`Enemy chose a ${enemyChoice}`);
-  if (playerChoice === enemyChoice) {
-    alert("Draw!");
-  } else if (
-    (playerChoice === "rock" && enemyChoice === "scissors") ||
-    (playerChoice === "scissors" && enemyChoice === "paper") ||
-    (playerChoice === "paper" && enemyChoice === "rock")
-  ) {
-    alert("You won!");
-  } else {
-    alert("Enemy won!");
-  }
-};
-rockPaperScissors();
+//task12();
