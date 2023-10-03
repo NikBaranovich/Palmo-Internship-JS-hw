@@ -3,223 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style/main.css" />
   </head>
   <body>
-    <div class="task-block">
-      <h2>Task 1</h2>
-      <p>
-        Create a button on the page. When you click on it, display the message Hello, Palmo in the
-        alert.
-      </p>
-      <button class="welcome-button">Welcome</button>
-    </div>
+    <div class="d-flex flex-grow-1 justify-content-center mt-3">
+      <div class="d-flex flex-column align-items-center border border-primary rounded w-75 p-3">
+        <h1>Random student</h1>
 
-    <div class="task-block">
-      <h2>Task 2</h2>
-      <p>
-        Create a button and input with the text Hello, Palmo. When you click on the button in the
-        input, the text should be replaced with Hello, World!
-      </p>
-      <button class="change-text-button">Change Text</button>
-      <input type="text" id="hello-input" value="Hello, Palmo" />
-    </div>
-
-    <div class="task-block">
-      <h2>Task 3</h2>
-      <p>
-        Create a button and input. When you click on the button, display the contents of the input
-        in console.log.
-      </p>
-      <button class="log-text-button">Log Text</button>
-      <input type="text" id="log-input" />
-    </div>
-
-    <div class="task-block">
-      <h2>Task 4</h2>
-      <p>
-        Create two h1 headings and a button. When you click on the button, the text in the headings
-        should be replaced with each other.
-      </p>
-      <h1 class="first-heading">First heading</h1>
-      <h1 class="second-heading">Second heading</h1>
-      <button class="swap-text-button">Swap Text</button>
-    </div>
-
-    <div class="task-block">
-      <h2>Task 5</h2>
-      <p>
-        Create a paragraph with any text and a button. When you click on the button, the text color
-        should change to red, clicking again, the text should return to its original color.
-      </p>
-      <p class="color-text">This is an example of text that will change color</p>
-      <button class="change-color-button">Change Text Color</button>
-    </div>
-
-    <div class="task-block">
-      <h2>Task 6</h2>
-      <p>
-        Create a button and input. When you click on the button, the input must become disabled.
-        When you click again it must unlock.
-      </p>
-      <input type="text" id="toggle-input" />
-      <button class="toggle-input-button">Disable</button>
-    </div>
-
-    <div class="task-block">
-      <h2>Task 7</h2>
-      <p>
-        Create 2 squares (green and red). When you click on green, the color of the green square
-        should turn red, the red one should turn green. And vice versa.
-      </p>
-      <div class="box green-box"></div>
-      <div class="box red-box"></div>
-    </div>
-
-    <div class="task-block">
-      <h2>Task 8</h2>
-      <p>
-        Create a button and an empty ul list on the page. With each click, a new list element with a
-        serial number should appear.
-      </p>
-      <ul class="item-list"></ul>
-      <button class="add-item-button">Add List Item</button>
-    </div>
-
-    <div class="task-block task-9">
-      <h2>Task9</h2>
-      <p>
-        Create a textarea and a button on the page. When you click on the button below, a list
-        should appear with each value in the textarea, separated by commas.
-      </p>
-      <textarea id="list-textarea"></textarea>
-      <button class="show-list-button">Show list</button>
-      <ol class="separated-list"></ol>
-    </div>
-    <div class="task-block">
-      <h2>Task10</h2>
-      <p>
-        Create a registration form with the fields login, email, age, password, repeat password and
-        a Register button.
-      </p>
-      <form id="register-form" action="#" method="post">
-        <div class="valid-registration hidden">
-          <p>Registration completed successfully</p>
+        <button
+          type="button"
+          class="btn btn-primary m-3"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Add a student
+        </button>
+        <div id="student-list">
+          <div class="card py-2 px-3 text-center">Student 1</div>
+          <div class="card py-2 px-3 text-center">Student 2</div>
+          <div class="card py-2 px-3 text-center">Student 3</div>
+          <div class="card py-2 px-3 text-center">Student 4</div>
         </div>
-        <label for="user-login">Login</label>
-        <input type="text" id="user-login" required />
-        <p id="user-login-error" class="validation-error-text"></p>
-        <label for="user-email">Email</label>
-        <input type="email" id="user-email" required />
-        <p id="user-email-error" class="validation-error-text"></p>
-        <label for="user-age">Age</label>
-        <input type="number" id="user-age" required />
-        <p id="user-age-error" class="validation-error-text"></p>
-        <label for="user-password">Password</label>
-        <input type="password" id="user-password" required />
-        <p id="user-password-error" class="validation-error-text"></p>
-        <label for="user-password-repeat">Repeat your password</label>
-        <input type="password" id="user-password-repeat" required />
-        <p id="user-password-repeat-error" class="validation-error-text"></p>
-        <input type="submit" id="user-register-button" />
-      </form>
-    </div>
-    <div class="task-block">
-      <h2>Task11</h2>
-      <p>
-        Create a simple calculator. The page must have buttons from 0 to 9 and signs + - * / =. When
-        you press the "=" button, display the result of the mathematical expression.
-      </p>
-      <div class="calculator">
-        <input type="text" class="calculator-display" readonly />
-        <button value="C" class="calculator-button calculator-button-clear">C</button>
-        <button value="1" class="calculator-button calculator-button-number calculator-button-1">
-          1
-        </button>
-        <button value="2" class="calculator-button calculator-button-number calculator-button-2">
-          2
-        </button>
-        <button value="3" class="calculator-button calculator-button-number calculator-button-3">
-          3
-        </button>
-        <button
-          value="/"
-          class="calculator-button calculator-button-operation calculator-button-divide"
-        >
-          /
-        </button>
-        <button value="4" class="calculator-button calculator-button-number calculator-button-4">
-          4
-        </button>
-        <button value="5" class="calculator-button calculator-button-number calculator-button-5">
-          5
-        </button>
-        <button value="6" class="calculator-button calculator-button-number calculator-button-6">
-          6
-        </button>
-        <button
-          value="*"
-          class="calculator-button calculator-button-operation calculator-button-multiply"
-        >
-          *
-        </button>
-        <button value="7" class="calculator-button calculator-button-number calculator-button-7">
-          7
-        </button>
-        <button value="8" class="calculator-button calculator-button-number calculator-button-8">
-          8
-        </button>
-        <button value="9" class="calculator-button calculator-button-number calculator-button-9">
-          9
-        </button>
-        <button
-          value="-"
-          class="calculator-button calculator-button-operation calculator-button-substract"
-        >
-          -
-        </button>
-        <button value="0" class="calculator-button calculator-button-number calculator-button-0">
-          0
-        </button>
-        <button value="." class="calculator-button calculator-button-point">.</button>
-        <button value="=" class="calculator-button calculator-button-equal">=</button>
-        <button
-          value="+"
-          class="calculator-button calculator-button-operation calculator-button-sum"
-        >
-          +
-        </button>
+        <button class="btn btn-info m-3" id="student-select-button">Select a student</button>
       </div>
     </div>
-    <div class="task-block">
-      <h2>Task12</h2>
-      <p>
-        Create a simple shopping cart. Display several products on the page. Also on the page there
-        must be an icon with a basket, when clicked, a modal window with a list of added products
-        will open. * The cart should have a "Empty Cart" button, which, when clicked, will remove
-        all items from the cart.
-      </p>
-      <button class="cart-button">
-        <img src="/pictures/shopping_cart.svg" width="30px" height="30px" />
-      </button>
-      <ul class="product-list"></ul>
-      <div class="modal">
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <span class="close">&times;</span>
-            <h2>Cart</h2>
+            <h5 class="modal-title" id="exampleModalLabel">Add new student</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
-            <ul class="cart-list"></ul>
+            <div class="form-group collapse" id="student-alert-success-wrapper">
+              <div class="alert alert-success" role="alert" id="student-add-success-alert">
+                Student added successfully!
+              </div>
+            </div>
+            <div class="form-group collapse" id="student-alert-error-wrapper">
+              <div class="alert alert-danger" role="alert" id="student-add-error-alert">
+                Student not added!
+              </div>
+            </div>
+            <label for="student-name" class="col-form-label">Student name:</label>
+            <input type="text" class="form-control" id="student-name" />
           </div>
           <div class="modal-footer">
-            <button class="cart-button delete-cart">Delete cart</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="save-student-button">
+              Save student
+            </button>
           </div>
         </div>
       </div>
     </div>
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
