@@ -6,6 +6,7 @@ const studentAlertError = document.getElementById("student-alert-error-wrapper")
 const bsStudentAlertError = new bootstrap.Collapse(studentAlertError, {
   toggle: false,
 });
+
 const saveStudentButton = document.getElementById("save-student-button");
 const studentInput = document.getElementById("student-name");
 const studentList = document.getElementById("student-list");
@@ -18,6 +19,7 @@ let isAnimationComplete = true;
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 async function delay(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
@@ -27,6 +29,7 @@ saveStudentButton.onclick = () => {
     bsStudentAlertError.show();
     return;
   }
+
   bsStudentAlertSuccess.show();
   students.push(studentInput.value);
 
@@ -41,9 +44,11 @@ saveStudentButton.onclick = () => {
 async function printStudentsWithInterval(students, index, maxIndex, scrolls) {
   for (index; index <= maxIndex; index++) {
     studentList.children[index].classList.add("text-white", "bg-primary");
+
     if (index != 0) {
       studentList.children[index - 1].classList.remove("text-white", "bg-primary");
     }
+
     await delay(100);
   }
   studentList.children[maxIndex].classList.remove("text-white", "bg-primary");
@@ -51,15 +56,18 @@ async function printStudentsWithInterval(students, index, maxIndex, scrolls) {
 
 async function printStudents(scrolls, selectedStudent) {
   isAnimationComplete = false;
+
   for (let index = 0; index < scrolls; index++) {
     await printStudentsWithInterval(students, 0, students.length - 1);
     await delay(0);
   }
+
   await printStudentsWithInterval(
     students,
     0,
     selectedStudent == 0 ? students.length - 1 : selectedStudent - 1
   );
+
   studentList.children[selectedStudent].classList.add("text-white", "bg-success");
   isAnimationComplete = true;
 }
@@ -68,10 +76,12 @@ selectStudentButton.onclick = () => {
   if (!isAnimationComplete) {
     return;
   }
+
   studentList.children[selectedStudent].classList.remove("text-white", "bg-success");
+
   const scrolls = getRandomNumber(2, 5);
   selectedStudent = getRandomNumber(0, students.length - 1);
-  console.log(students[selectedStudent]);
+
   printStudents(scrolls, selectedStudent);
 };
 
@@ -80,6 +90,7 @@ studentAlertSuccess.addEventListener("show.bs.collapse", function () {
     bsStudentAlertSuccess.hide();
   }, 1500);
 });
+
 studentAlertError.addEventListener("show.bs.collapse", function () {
   setTimeout(() => {
     bsStudentAlertError.hide();
